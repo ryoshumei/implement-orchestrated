@@ -1,0 +1,17 @@
+{
+  "name": "ryoshumei",
+  "owner": {
+    "name": "ryoshumei",
+    "url": "https://github.com/ryoshumei"
+  },
+  "description": "ryoshumei's Claude Code plugins.",
+  "plugins": [
+    {
+      "name": "implement-orchestrated",
+      "source": "./",
+      "description": "Orchestrator-subagent /implement built on Matt Pocock's skills: parallel coders in worktrees, per-ticket review, fixes sent back to the same coder.",
+      "category": "engineering",
+      "keywords": ["orchestrator", "subagents", "worktree", "tdd", "mattpocock-skills"]
+    }
+  ]
+}
