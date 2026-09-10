@@ -15,6 +15,11 @@ Talk to subagents through **context pointers** (paths, issue URLs, branch names,
 
 `docs/agents/issue-tracker.md` tells you how to fetch, claim, comment on, and close a ticket. If it is missing, stop and tell the user to run `/setup-matt-pocock-skills`.
 
+
+## Agent names
+
+Installed as a plugin, the three agents are registered under the plugin's namespace: `implement-orchestrated:coder`, `implement-orchestrated:reviewer`, `implement-orchestrated:final-reviewer`. Copied by hand into `~/.claude/agents/`, they are the bare `coder`, `reviewer`, `final-reviewer`. Check the Agent tool's available types once at the start and use whichever form is registered; the rest of this skill writes the short form.
+
 ## Preconditions
 
 Check all three before dispatching anything; on a failure, stop and tell the user what to change.
@@ -44,7 +49,7 @@ Done when the branch exists, the baseline is recorded, and the PR (if any) is op
 
 ### 3. Dispatch the frontier
 
-For each frontier ticket while fewer than N coders are running: claim the ticket per the tracker doc, then spawn a `coder` with worktree isolation (`subagent_type: coder`, `isolation: worktree`, in the background) using the coder brief below. Record the agent's id or name in `state.md`; when it reports, record its branch and worktree path.
+For each frontier ticket while fewer than N coders are running: claim the ticket per the tracker doc, then spawn a `coder` with worktree isolation (`subagent_type: implement-orchestrated:coder`, `isolation: worktree`, in the background) using the coder brief below. Record the agent's id or name in `state.md`; when it reports, record its branch and worktree path.
 
 Done when every frontier ticket is claimed and dispatched, or N coders are running.
 

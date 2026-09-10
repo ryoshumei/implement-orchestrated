@@ -1,6 +1,6 @@
 {
   "name": "implement-orchestrated",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Orchestrator-subagent /implement for Claude Code, built on Matt Pocock's skills: parallel coders in worktrees, per-ticket review, fixes sent back to the same coder with its context intact.",
   "author": {
     "name": "ryoshumei",
@@ -9,7 +9,15 @@
   "homepage": "https://github.com/ryoshumei/implement-orchestrated",
   "repository": "https://github.com/ryoshumei/implement-orchestrated",
   "license": "MIT",
-  "keywords": ["claude-code", "orchestrator", "subagents", "worktree", "mattpocock-skills", "tdd"],
-  "skills": ["./skills/implement-orchestrated"],
-  "agents": ["./agents/coder.md", "./agents/reviewer.md", "./agents/final-reviewer.md"]
+  "keywords": [
+    "claude-code",
+    "orchestrator",
+    "subagents",
+    "worktree",
+    "mattpocock-skills",
+    "tdd"
+  ],
+  "skills": [
+    "./skills/implement-orchestrated"
+  ]
 }
