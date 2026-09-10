@@ -37,7 +37,7 @@ cp implement-orchestrated/agents/*.md ~/.claude/agents/
 
 Installed as a plugin, the agents are namespaced (`implement-orchestrated:coder` etc.); copied by hand they are the bare `coder` / `reviewer` / `final-reviewer`. The orchestrator handles both. `claude plugin details implement-orchestrated@ryoshumei` should list **Agents (3)**; the manifest relies on the default `agents/` directory because an explicit `agents` array in `plugin.json` is not loaded by Claude Code 2.1.267 even though the reference documents it.
 
-Then add to `~/.claude/settings.json` so subagent worktrees branch from your feature branch instead of the remote default branch:
+Then set `worktree.baseRef` to `head` in `~/.claude/settings.json`:
 
 ```json
 {
@@ -45,6 +45,14 @@ Then add to `~/.claude/settings.json` so subagent worktrees branch from your fea
     "baseRef": "head"
   }
 }
+```
+
+Why: Claude Code's default base for a new worktree is the remote default branch (`origin/main`), but the orchestrator merges each finished ticket into your feature branch and then dispatches the tickets that depend on it. With the default, ticket 2's worktree would branch from `origin/main` and never see ticket 1's merged code, so the coder builds on stale code (or re-implements ticket 1 and conflicts at merge). With `head`, every worktree branches from the current tip of the feature branch.
+
+Claude cannot edit `~/.claude/settings.json` for you (the permission classifier refuses), so run this yourself once:
+
+```bash
+python3 -c "import json;p='$HOME/.claude/settings.json';d=json.load(open(p));d.setdefault('worktree',{})['baseRef']='head';json.dump(d,open(p,'w'),ensure_ascii=False,indent=2)"
 ```
 
 If your repo keeps `CONTEXT.md`, `docs/agents/` or `.env` files gitignored, list them in a `.worktreeinclude` file at the repo root (gitignore syntax) so Claude Code copies them into each worktree:
@@ -55,6 +63,8 @@ docs/agents/
 docs/adr/
 CLAUDE.local.md
 ```
+
+List specific paths. Do not list `.claude/` wholesale: `.claude/worktrees/` holds your other worktrees and would be copied into every new one (gigabytes, recursively). Name the subfolders you need instead (`.claude/hooks/`, `.claude/skills/`, `.claude/settings.json`). The Agent tool's worktree isolation does not run your `PostToolUse` hooks, so `.worktreeinclude` is the only thing that copies untracked files into a coder's worktree.
 
 ## Usage
 

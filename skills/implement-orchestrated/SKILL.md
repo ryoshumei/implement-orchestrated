@@ -25,7 +25,11 @@ Installed as a plugin, the three agents are registered under the plugin's namesp
 Check all three before dispatching anything; on a failure, stop and tell the user what to change.
 
 - The working tree is clean.
-- The `worktree.baseRef` setting is `head` (grep `baseRef` in `~/.claude/settings.json` and `.claude/settings*.json`). Without it, coder worktrees branch from the remote default branch, so a ticket that depends on a merged ticket would build on stale code.
+- The `worktree.baseRef` setting is `head` (grep `baseRef` in `~/.claude/settings.json` and `.claude/settings*.json`). Without it, coder worktrees branch from the remote default branch, so a ticket that depends on a merged ticket would build on stale code. When it is missing, stop and hand the user this exact command to run themselves (Claude is not allowed to edit `~/.claude/settings.json`), then ask them to start a fresh session:
+
+  ```bash
+  python3 -c "import json;p='$HOME/.claude/settings.json';d=json.load(open(p));d.setdefault('worktree',{})['baseRef']='head';json.dump(d,open(p,'w'),ensure_ascii=False,indent=2)"
+  ```
 - Every ticket has a `Blocked by` line, and the initial frontier is non-empty. An empty frontier with open tickets means a cycle in the graph.
 
 ## Steps

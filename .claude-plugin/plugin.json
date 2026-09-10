@@ -1,6 +1,6 @@
 {
   "name": "implement-orchestrated",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Orchestrator-subagent /implement for Claude Code, built on Matt Pocock's skills: parallel coders in worktrees, per-ticket review, fixes sent back to the same coder with its context intact.",
   "author": {
     "name": "ryoshumei",
