@@ -15,7 +15,7 @@ It uses only documented Claude Code features: the Agent tool with `isolation: wo
 ## Requirements
 
 - Claude Code 2.1.263 or newer
-- The `mattpocock-skills` plugin, with `/setup-matt-pocock-skills` run once in the repo (the orchestrator reads `docs/agents/issue-tracker.md` to fetch, claim and close tickets)
+- The `mattpocock-skills` plugin, with `/setup-matt-pocock-skills` run once in the repo (the orchestrator reads `docs/agents/issue-tracker.md` to fetch, claim and close tickets). Matt's skills are called by their namespaced names, so a missing plugin fails loudly instead of falling through to a same-named bundled or personal skill
 - Tickets produced by `/to-tickets`, each with a `Blocked by` line
 
 ## Install
