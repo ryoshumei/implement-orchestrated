@@ -16,9 +16,11 @@ Talk to subagents through **context pointers** (paths, issue URLs, branch names,
 `docs/agents/issue-tracker.md` tells you how to fetch, claim, comment on, and close a ticket. If it is missing, stop and tell the user to run `/setup-matt-pocock-skills`.
 
 
-## Agent names
+## Agent and skill names
 
 Installed as a plugin, the three agents are registered under the plugin's namespace: `implement-orchestrated:coder`, `implement-orchestrated:reviewer`, `implement-orchestrated:final-reviewer`. Copied by hand into `~/.claude/agents/`, they are the bare `coder`, `reviewer`, `final-reviewer`. Check the Agent tool's available types once at the start and use whichever form is registered; the rest of this skill writes the short form.
+
+Matt's skills are called by their **namespaced** names (`mattpocock-skills:code-review`, `mattpocock-skills:resolving-merge-conflicts`, `mattpocock-skills:tdd`). A bare name would resolve to a bundled or personal skill of the same name instead — Claude Code ships its own `code-review`, and a user skill at `~/.claude/skills/code-review/` shadows that in turn, so the bare form can silently run a different review. If your install uses another namespace, substitute it.
 
 ## Preconditions
 
@@ -72,7 +74,7 @@ Done when the ticket is Approved or escalated.
 
 In the main checkout, on the feature branch:
 
-1. `git merge --no-ff <ticket-branch>`. On a conflict, call the Skill tool with "resolving-merge-conflicts".
+1. `git merge --no-ff <ticket-branch>`. On a conflict, call the Skill tool with "mattpocock-skills:resolving-merge-conflicts".
 2. Run the full test suite. Red means an integration problem the ticket-level review could not see: spawn a `coder` **without isolation** on the feature branch with the failing output saved to `<notes>/integration-<NN>.md` as its pointer. Merges are serial, so only one such coder runs at a time.
 3. Close the ticket per the tracker doc, with the merge commit SHA in the closing comment.
 4. `git worktree remove <path>` and delete the ticket branch.
@@ -81,7 +83,7 @@ Recompute the frontier and return to step 3. Done when every ticket is closed or
 
 ### 6. Final gate
 
-1. Call the Skill tool with "code-review", fixed point = the commit the feature branch started from. Fix every finding with one `coder` without isolation on the feature branch; commit.
+1. Call the Skill tool with "mattpocock-skills:code-review" — the two-axis Standards + Spec review, not a bug hunt — fixed point = the commit the feature branch started from. Fix every finding with one `coder` without isolation on the feature branch; commit.
 2. Spawn `final-reviewer` with the spec pointer and `git diff <base-commit>...HEAD`. On **With fixes**, run one more fix round with the same coder; on **No**, escalate.
 3. Push. Mark the PR ready for review, or report the branch name when there is no remote.
 4. Remove any remaining worktrees and ticket branches.
