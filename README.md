@@ -35,7 +35,7 @@ cp -r implement-orchestrated/skills/implement-orchestrated ~/.claude/skills/
 cp implement-orchestrated/agents/*.md ~/.claude/agents/
 ```
 
-Installed as a plugin, the agents are namespaced (`implement-orchestrated:coder` etc.); copied by hand they are the bare `coder` / `reviewer` / `final-reviewer`. The orchestrator handles both. `claude plugin details implement-orchestrated@ryoshumei` should list **Agents (3)**; the manifest relies on the default `agents/` directory because an explicit `agents` array in `plugin.json` is not loaded by Claude Code 2.1.267 even though the reference documents it.
+Installed as a plugin, the agents are namespaced (`implement-orchestrated:coder` etc.); copied by hand they are the bare `coder` / `reviewer` / `final-reviewer`. The orchestrator handles both. `claude plugin details implement-orchestrated@ryoshumei` should list **Agents (3)**; the manifest relies on the default `agents/` directory because an explicit `agents` array in `plugin.json` is not loaded by Claude Code 2.1.265 even though the reference documents it.
 
 Then set `worktree.baseRef` to `head` in `~/.claude/settings.json`:
 
