@@ -20,7 +20,7 @@ Talk to subagents through **context pointers** (paths, issue URLs, branch names,
 
 Installed as a plugin, the three agents are registered under the plugin's namespace: `implement-orchestrated:coder`, `implement-orchestrated:reviewer`, `implement-orchestrated:final-reviewer`. Copied by hand into `~/.claude/agents/`, they are the bare `coder`, `reviewer`, `final-reviewer`. Check the Agent tool's available types once at the start and use whichever form is registered; the rest of this skill writes the short form.
 
-Matt's skills are called by their **namespaced** names (`mattpocock-skills:code-review`, `mattpocock-skills:resolving-merge-conflicts`, `mattpocock-skills:tdd`). A bare name would resolve to a bundled or personal skill of the same name instead — Claude Code ships its own `code-review`, and a user skill at `~/.claude/skills/code-review/` shadows that in turn, so the bare form can silently run a different review. If your install uses another namespace, substitute it.
+Matt's skills are called by their **namespaced** names (`mattpocock-skills:code-review`, `mattpocock-skills:resolving-merge-conflicts`, `mattpocock-skills:tdd`, `mattpocock-skills:codebase-design`). A bare name would resolve to a bundled or personal skill of the same name instead — Claude Code ships its own `code-review`, and a user skill at `~/.claude/skills/code-review/` shadows that in turn, so the bare form can silently run a different review. If your install uses another namespace, substitute it.
 
 ## Preconditions
 
