@@ -22,6 +22,8 @@ Installed as a plugin, the three agents are registered under the plugin's namesp
 
 Matt's skills are called by their **namespaced** names (`mattpocock-skills:code-review`, `mattpocock-skills:resolving-merge-conflicts`, `mattpocock-skills:tdd`, `mattpocock-skills:codebase-design`). A bare name would resolve to a bundled or personal skill of the same name instead — Claude Code ships its own `code-review`, and a user skill at `~/.claude/skills/code-review/` shadows that in turn, so the bare form can silently run a different review. If your install uses another namespace, substitute it.
 
+Step 6's bug hunt is the one deliberate exception: it calls the **bare** `code-review`, because there a personal skill shadowing the bundled one is exactly what you want.
+
 ## Preconditions
 
 Check all three before dispatching anything; on a failure, stop and tell the user what to change.
@@ -84,9 +86,10 @@ Recompute the frontier and return to step 3. Done when every ticket is closed or
 ### 6. Final gate
 
 1. Call the Skill tool with "mattpocock-skills:code-review" — the two-axis Standards + Spec review, not a bug hunt — fixed point = the commit the feature branch started from. Fix every finding with one `coder` without isolation on the feature branch; commit.
-2. Spawn `final-reviewer` with the spec pointer and `git diff <base-commit>...HEAD`. On **With fixes**, run one more fix round with the same coder; on **No**, escalate.
-3. Push. Mark the PR ready for review, or report the branch name when there is no remote.
-4. Remove any remaining worktrees and ticket branches.
+2. Hunt for correctness bugs — **no gate before this one does**. The per-ticket reviews ask whether each ticket's acceptance criteria are met; step 1 asks whether the code follows the repo's standards and the spec. A bug that satisfies both passes them all. Call the Skill tool with the bare "code-review" at `max` effort, targeting `<base-commit>...HEAD`; it reports ranked findings, each with a concrete failure scenario. Triage them yourself: fix the real ones with one `coder` without isolation on the feature branch, rerun the full suite, and record every finding you reject with the reason. Skip only when the diff is docs-only.
+3. Spawn `final-reviewer` with the spec pointer and `git diff <base-commit>...HEAD`. It runs last on purpose, so it sees the fixes from steps 1 and 2. On **With fixes**, run one more fix round with the same coder; on **No**, escalate.
+4. Push. Mark the PR ready for review, or report the branch name when there is no remote.
+5. Remove any remaining worktrees and ticket branches.
 
 Report: tickets closed with their merge SHAs, the PR link or branch, and every escalated ticket with its review pointer.
 
