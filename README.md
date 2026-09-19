@@ -8,7 +8,7 @@ Matt's flow is `/grill-with-docs → /to-spec → /to-tickets → /implement`, w
 - reviews every finished ticket with a `reviewer` subagent
 - sends review findings back to the **same coder**, which resumes with its previous context intact
 - merges, closes the ticket, recomputes the frontier, repeats
-- finishes with Matt's `code-review` skill and a `final-reviewer` pass, then pushes and marks the PR ready
+- finishes with three gates — Matt's `code-review` (Standards + Spec), a `max`-effort bug hunt, and a `final-reviewer` pass — then pushes and marks the PR ready
 
 It uses only documented Claude Code features: the Agent tool with `isolation: worktree`, `SendMessage` to resume a subagent, the `worktree.baseRef` setting, and `.worktreeinclude`.
 
