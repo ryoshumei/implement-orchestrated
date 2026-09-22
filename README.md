@@ -89,7 +89,7 @@ The orchestrator restates the plan (branch, ticket count, first frontier, N) and
 | `skills/implement-orchestrated/SKILL.md` | The orchestrator. User-invoked only. |
 | `agents/coder.md` | Implementer: pre-agreed seams, red → green via Matt's `tdd` skill, reports by context pointers. Pinned to Opus with max effort; change `model`/`effort` to taste. |
 | `agents/reviewer.md` | Per-ticket spec and quality review; verifies the coder's claims by running things. |
-| `agents/final-reviewer.md` | Whole-branch review at the end. Declares `model: inherit` explicitly so it always runs on the session model (the most capable available) even when `CLAUDE_CODE_SUBAGENT_MODEL` sets a cheaper default for other subagents. |
+| `agents/final-reviewer.md` | Whole-branch review at the end. Declares `model: inherit` explicitly so it always runs on the session model, even when `CLAUDE_CODE_SUBAGENT_MODEL` sets a cheaper default for other subagents. |
 
 `coder` has no `isolation` in its frontmatter on purpose: the orchestrator passes `isolation: worktree` per call, so the same agent still works for ordinary bug fixes.
 

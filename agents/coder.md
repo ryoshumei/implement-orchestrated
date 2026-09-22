@@ -1,6 +1,6 @@
 ---
 name: coder
-description: Use for coding tasks delegated to a subagent: implementing a ticket or spec slice, fixing a bug, refactoring, writing tests. Works test-first at pre-agreed seams and reports by context pointers. Runs on Opus 5 with max reasoning effort.
+description: Use for coding tasks delegated to a subagent: implementing a ticket or spec slice, fixing a bug, refactoring, writing tests. Works test-first at pre-agreed seams and reports by context pointers. Runs on the latest Opus with max reasoning effort.
 model: opus
 effort: max
 ---

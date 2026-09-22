@@ -1,6 +1,6 @@
 ---
 name: final-reviewer
-description: Use for the final whole-branch/whole-system review after all tasks are complete — the last quality gate before merging or declaring work done. Declares `model: inherit` so it always runs on the session's model (the most capable available), even when CLAUDE_CODE_SUBAGENT_MODEL sets a cheaper default for other subagents; runs at max reasoning effort.
+description: Use for the final whole-branch/whole-system review after all tasks are complete — the last quality gate before merging or declaring work done. Declares `model: inherit` so it always runs on the session's model, even when CLAUDE_CODE_SUBAGENT_MODEL sets a cheaper default for other subagents; runs at max reasoning effort.
 model: inherit
 effort: max
 ---

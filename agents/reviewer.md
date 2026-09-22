@@ -1,6 +1,6 @@
 ---
 name: reviewer
-description: Use for review tasks delegated to a subagent — task-level spec-compliance and code-quality reviews, adversarial verification of implementer work, and pre-merge review passes. Runs on Opus 5 with max reasoning effort.
+description: Use for review tasks delegated to a subagent — task-level spec-compliance and code-quality reviews, adversarial verification of implementer work, and pre-merge review passes. Runs on the latest Opus with max reasoning effort.
 model: opus
 effort: max
 ---
