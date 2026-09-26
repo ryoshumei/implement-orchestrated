@@ -20,12 +20,14 @@ It uses only documented Claude Code features: the Agent tool with `isolation: wo
 
 ## Install
 
-As a plugin:
+As a plugin, from the `ryoshumei` marketplace in [ryoshumei/skills](https://github.com/ryoshumei/skills), which lists all of ryoshumei's plugins:
 
 ```bash
-claude plugin marketplace add ryoshumei/implement-orchestrated
+claude plugin marketplace add ryoshumei/skills
 claude plugin install implement-orchestrated@ryoshumei
 ```
+
+If you added this repo as the `ryoshumei` marketplace before, it keeps working and keeps delivering updates. To switch to ryoshumei/skills and get the other plugins too, follow [Moving from ryoshumei/implement-orchestrated](https://github.com/ryoshumei/skills#moving-from-ryoshumeiimplement-orchestrated).
 
 Or copy the files by hand:
 
